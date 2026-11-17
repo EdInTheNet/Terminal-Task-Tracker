@@ -19,56 +19,57 @@ public class Main
 		boolean isAktiv = true;// wird verwendet um die Sityung offen Zu halten
 
 		IO.println(
-				"Wilkommen zu der Task Tracker CLI App, was kann ich für Sie tuen ?");
+				"Welcome to the Task-Tracker CLI app, what do you need today ?");
 		IO.println("");
 
-		try (Scanner userEingabe = new Scanner(System.in))
+		try (Scanner userInput = new Scanner(System.in))
 		{
 			while (isAktiv == true)
 			{
 
-				IO.println("Momentan haben Sie " + taskList.size() + " Aufgaben");
+				IO.println("Currently you got " + taskList.size() + " tasks");
 				IO.println("");
 
 				// Commands Displayed to User
-				IO.println("Eine Aufgabe hinzufügen ? add");
-				IO.println("Alle Aufgaben Anzeigen ? show all");
-				IO.println("Einen Aufgaben Status ändern ? change");
-				IO.println("Eine Aufgabe lösche ? delete");
+				IO.println("Whant to add a new task ? Enter: add");
+				IO.println("Whant to see all your current tasks ? Enter: show all");
+				IO.println("Whant to change a task state ? Enter: change");
+				IO.println("Whant to delet a task ? Enter: delete");
 
-				if (!userEingabe.hasNextLine())
-				{ // Wenn keine weitere Zeile verfügbar ist, verlasse die Schleife.
-					break; // Eingabestream wurde beendet
+				if (!userInput.hasNextLine())
+				{ // if no second line is avileble , leave the loop 
+					break; // ends the inputstream 
 				}
-				String command = userEingabe.nextLine().trim();
+				String command = userInput.nextLine().trim();
 
 				switch (command)
 				{
 					case "add":
 						IO.println(
-								"Schreibe einen Titel für deinen neue Aufgabe");
-						String titelEingabe = userEingabe.nextLine();
-						IO.println("Aufgaben Titel: " + titelEingabe);
+								"Writte a title for your new task");
+						String titelInput = userInput.nextLine();
+						IO.println("Task title: " + titelInput);
 
-						IO.println("Schreibe auf was du zu tun hast");
-						String contextEingabe = userEingabe.nextLine();
-						IO.println("Aufgabe: " + contextEingabe);
+						IO.println("Writte what you got to do");
+						String contextEingabe = userInput.nextLine();
+						IO.println("task: " + contextEingabe);
 
-						Cli_methods.addTask(taskList, titelEingabe,
+						Cli_methods.addTask(taskList, titelInput,
 								contextEingabe);
 						break;
 					case "show all":
 						Cli_methods.showAllTasks(taskList);
 						break;
 					case "change":
-						IO.println("Welche Aufgabe möchtest du ändern ? ");
+						IO.println("What task do you wish to change ? ");
 
-						String titelSuchEingabe = userEingabe.nextLine();
+						String titelSearchInput = userInput.nextLine();
 						Task result = Cli_methods.searchForTask(taskList,
-								titelSuchEingabe);
+								titelSearchInput);
 						if (result == null)
 						{
-							IO.println("Aufgabe nicht gefunden");
+							IO.println("Task not found");
+							break;
 						}
 
 						TaskState[] states = TaskState.values();
@@ -78,46 +79,46 @@ public class Main
 									stat.ordinal() + ":" + "  " + stat.name());
 						}
 
-						IO.println("bitte wähle eine Nummer aus");
+						IO.println("please select a nummber");
 						try
 						{
-							int userAuswahl = Integer
-									.parseInt(userEingabe.nextLine().trim());
-							if (userAuswahl >= 0 && userAuswahl < states.length)
+							int userSelection = Integer
+									.parseInt(userInput.nextLine().trim());
+							if (userSelection >= 0 && userSelection < states.length)
 							{
-								result.setTaskState(states[userAuswahl]);
-								IO.println("Status erfolgreich geändert");
+								result.setTaskState(states[userSelection]);
+								IO.println("Status succesfully changed");
 							}
 							else
 							{
-								IO.println("Diese Eingabe ist nicht zulässig");
+								IO.println("This input is not allowed");
 							}
 						}
 						catch (NumberFormatException err)
 						{
-							IO.println("Bitte gib eine Zulässige Zahl ein");
+							IO.println("Please enter one of the nummbers that was shown to you ");
 						}
 						break;
 
 					case "delete":
-						IO.println("Welche Aufgabe möchten Sie entfernen ?");
-						String titelEingabeZumLoeschen = userEingabe.nextLine();
+						IO.println("Which task do you wish to delete ?");
+						String titelInputForDeletion = userInput.nextLine();
 
 						Cli_methods.deleteTask(taskList,
-								titelEingabeZumLoeschen);
+								titelInputForDeletion);
 						break;
 					case "exit":
 						isAktiv = false;
 						break;
 					default:
-						IO.println("Bitte gib eins der bereits gennaten Kommandos ein oder tppe exit ein um die Anwendugn zu verlassen");
+						IO.println("PLease enter on of the commands or enter exit to close the app ");
 						break;
 				}
 			}
 		}
 		catch (NoSuchElementException err)
 		{
-			IO.println("Eingabe beeandet. Die Anwendung wird geschlossen " + err);
+			IO.println("app has been closed " + err);
 		}
 	}
 

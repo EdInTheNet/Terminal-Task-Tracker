@@ -10,7 +10,7 @@ public class Cli_methods
 			String context)
 	{
 		taskList.add(new Task(titel, context));
-		IO.println("Aufgabe: " + titel + " Erfolgreich hinzugefügt");
+		IO.println("Task: " + titel + " succesfully added");
 	}
 
 	public static void showAllTasks(List<Task> taskList)
@@ -29,7 +29,7 @@ public class Cli_methods
 	{
 		for(Task task : taskList) {
 			if(task.getTitel().equals(titel)) {
-				IO.println("Aufgabe:" + titel + " gefunden");
+				IO.println("Task:" + titel + " found");
 				return task;
 			}
 		}
@@ -42,11 +42,11 @@ public class Cli_methods
 				.removeIf(task -> task.getTitel().equals(titel));
 		if (removed)
 		{
-			IO.println("Aufgabe" + titel + "erfolgreich entfernt");
+			IO.println("Task" + titel + "succesfully found");
 		}
 		else
 		{
-			IO.println("Aufgabe" + titel + "nicht vorhanden");
+			IO.println("Task" + titel + "not found");
 		}
 	}
 

@@ -13,7 +13,7 @@ public class Task
 		this.taskContext = taskContext;
 	}
 	
-	// geter methoden 
+	// geter methods 
 	public String getTitel() {
 		return this.titel;
 	}
@@ -26,7 +26,7 @@ public class Task
 		return this.taskState;
 	}
 	
-	// Seter methoden 
+	// Seter method
 	public void setTaskState(TaskState value) {
 		this.taskState = value;
 	}
