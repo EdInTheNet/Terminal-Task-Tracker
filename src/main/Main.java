@@ -8,6 +8,7 @@ import java.util.Scanner;
 import cli_logic.Cli_methods;
 import cli_logic.Task;
 import cli_logic.TaskState;
+import saving_system.SavingManagement;
 
 public class Main
 {
@@ -56,6 +57,7 @@ public class Main
 
 						Cli_methods.addTask(taskList, titelInput,
 								contextEingabe);
+						SavingManagement.saveTasksToJson(taskList, SavingManagement.getStandardFilename());
 						break;
 					case "show all":
 						Cli_methods.showAllTasks(taskList);
@@ -88,6 +90,7 @@ public class Main
 							{
 								result.setTaskState(states[userSelection]);
 								IO.println("Status succesfully changed");
+								SavingManagement.saveTasksToJson(taskList, SavingManagement.getStandardFilename());
 							}
 							else
 							{
@@ -106,6 +109,7 @@ public class Main
 
 						Cli_methods.deleteTask(taskList,
 								titelInputForDeletion);
+						SavingManagement.saveTasksToJson(taskList, SavingManagement.getStandardFilename());
 						break;
 					case "exit":
 						isAktiv = false;
