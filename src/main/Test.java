@@ -20,27 +20,24 @@ public class Test
 	}
 	
 	public void run() {
+		IO.println(SavingManagement.loadTaskListFromFile().size());//just to look if the rigt nummber of tasks is inthe file 
 		List<Task> taskList = new ArrayList<>();
 		
 		for(int i = 0; i < 5; i++) {
 			Cli_methods.addTask(taskList, "Test_Entry", "Tets Test Test ...");
 			
 		}
-		
-		Cli_methods.addTask(taskList, "Test2", "ishjkshfjiasdhf");
-		for(Task task : taskList) {
-			IO.println(task.getTitel() + ": " + task.getTaskContext() + ", " + task.getTaskState());
-		}
+		Cli_methods.showAllTasks(taskList);
 		SavingManagement.saveTasksToJson(taskList, SavingManagement.getStandardFilename());
 		
-		try(Scanner input = new Scanner(System.in)){
+		//try(Scanner input = new Scanner(System.in)){
 			
-			String mySearch = input.nextLine();
-			Cli_methods.searchForTask(taskList, mySearch);	
+		//	String mySearch = input.nextLine();
+		//	Cli_methods.searchForTask(taskList, mySearch);	
 			
-		}catch(InputMismatchException error){
-			IO.println(error);
-		}
+		//}catch(InputMismatchException error){
+		//	IO.println(error);
+		//}
 
 	}
 

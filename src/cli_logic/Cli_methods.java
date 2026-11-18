@@ -15,38 +15,38 @@ public class Cli_methods
 
 	public static void showAllTasks(List<Task> taskList)
 	{
+		int index = 0;
 		for (Task task : taskList)
 		{
+			IO.println("Task ID: " + index);
 			IO.println(task.getTitel());
 			IO.println(task.getTaskState());
 			IO.println(task.getTaskContext());
 			IO.println("");
+			
+			index++;
 		}
 
 	}
 
-	public static Task searchForTask(List<Task> taskList, String titel)
+	public static Task searchForTask(List<Task> taskList, int index)
 	{
-		for(Task task : taskList) {
-			if(task.getTitel().equals(titel)) {
-				IO.println("Task:" + titel + " found");
-				return task;
-			}
+		if(index >= 0 && index < taskList.size()) {
+			Task searchResult = taskList.get(index);
+			IO.println("Task " + searchResult.getTitel() + "found");
+			return searchResult;
 		}
+		IO.println("No result found under the given ID");
 		return null;
 	}
 
-	public static void deleteTask(List<Task> taskList, String titel)
+	public static void deleteTask(List<Task> taskList, int index)
 	{
-		boolean removed = taskList
-				.removeIf(task -> task.getTitel().equals(titel));
-		if (removed)
-		{
-			IO.println("Task" + titel + "succesfully found");
-		}
-		else
-		{
-			IO.println("Task" + titel + "not found");
+		if(index >= 0 && index < taskList.size()) {
+			taskList.remove(index);
+			IO.println("Task ID " + index + " succesfully removed ");
+		}else {
+			IO.println("please enter a valid Task ID");
 		}
 	}
 
