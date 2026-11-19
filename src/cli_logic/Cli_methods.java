@@ -22,6 +22,7 @@ public class Cli_methods
 			IO.println(task.getTitel());
 			IO.println(task.getTaskState());
 			IO.println(task.getTaskContext());
+			IO.println(task.getDateOfTask().format(Task.DATE_FORMAT));// Implementation of the global DATE_FORMAT
 			IO.println("");
 			
 			index++;
